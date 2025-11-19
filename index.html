@@ -10,6 +10,19 @@
     <script type="module" src="./js/main.js" defer></script>
 </head>
 <body>
+    <!-- script temporaire de gestion des erreurs -->
+    <script>
+    window.onerror = function (message, source, lineno, colno, error) {
+        alert(
+            "ERREUR : " + message +
+            "\nFichier : " + source +
+            "\nLigne : " + lineno +
+            "\nColonne : " + colno +
+            "\nDétails : " + (error ? error.stack : "aucun")
+        );
+    };
+    </script>
+    <!-- fin du script temporaire -->
     <canvas id="renderCanvas"></canvas>
 </body>
 </html>

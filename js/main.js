@@ -4,23 +4,23 @@ import {createGround, createPlayer, createCamera} from "./elements.js"
 const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 const playerSpeed = 0.2;
 
-// Canva
+// Canvas :
 const canvas = document.querySelector("#renderCanvas");
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-// Engine & Scene
+// Engine :
 const engine = new BABYLON.Engine(canvas, true);
+// Scene :
 const scene = new BABYLON.Scene(engine);
-
-// Ground
+// Ground :
 const ground = createGround(scene);
-// Player
+// Player :
 const player = createPlayer(scene);
-// Camera
+// Camera :
 const camera = createCamera(scene, player);
-
-// Player's movement
+  
+// keyboard's inputs
 const keyboardInputs = {};
 if (!isMobile) {
     window.addEventListener("keydown", (event) => {
@@ -31,19 +31,12 @@ if (!isMobile) {
     });
 }
 
-function playerMovement(keyboardInputs) {
-    if (isMobile) {
-        
-    } else {
-        if (keyboardInputs["w"] || keyboardInputs["ArrowUp"]) player.position.z += playerSpeed;
-        if (keyboardInputs["s"] || keyboardInputs["ArrowDown"]) player.position.z -= playerSpeed;
-        if (keyboardInputs["a"] || keyboardInputs["ArrowLeft"]) player.position.x -= playerSpeed;
-        if (keyboardInputs["d"] || keyboardInputs["ArrowRight"]) player.position.x += playerSpeed;
-    }
-}
-
-// Camera's movement
 scene.registerBeforeRender(() => {
+    if (keyboardInputs["w"] || keyboardInputs["ArrowUp"]) player.position.z += playerSpeed;
+    if (keyboardInputs["s"] || keyboardInputs["ArrowDown"]) player.position.z -= playerSpeed;
+    if (keyboardInputs["a"] || keyboardInputs["ArrowLeft"]) player.position.x -= playerSpeed;
+    if (keyboardInputs["d"] || keyboardInputs["ArrowRight"]) player.position.x += playerSpeed;
+    // Camera's movement
     camera.target = player.position;
 });
 
