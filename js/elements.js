@@ -2,7 +2,7 @@
 export function createLight(scene) {
     const light = new BABYLON.HemisphericLight(
         "light",
-        new BABYLON.Vector3(0, 1, 0),
+        new BABYLON.Vector3(0.1, 1, 0.3),
         scene
     )
     light.intensity = 0.7;
