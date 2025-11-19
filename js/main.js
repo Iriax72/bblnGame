@@ -1,4 +1,4 @@
-import {createGround} from "./ground.js"
+import {createGround, createCamera} from "./elements.js"
 
 // const values
 const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
@@ -20,19 +20,7 @@ const ground = createGround(scene);
 const player = new BABYLON.MeshBuilder.CreateBox("player", {size: 2}, scene);
 
 // Camera
-const camera = new BABYLON.ArcRotateCamera(
-    "camera",
-    Math.PI/2,
-    Math.PI/4,
-    10,
-    player.position.add(new BABYLON.Vector3(0, 2, 0)),
-    scene
-);
-camera.attachControl();
-camera.lowerRadiusLimit = camera.upperRadiusLimit = camera.radius;
-camera.panningSensibility = 0;
-camera.lowerBetaLimit = -Math.PI/6;
-camera.upperBetaLimit = Math.PI/2;
+const camera = createCamera(scene, player);
 
 // Player's movement
 const keyboardInputs = {};
@@ -58,8 +46,8 @@ function playerMovement(keyboardInputs) {
 
 // Camera's movement
 scene.registerBeforeRender(() => {
-    camera.target = player.position.add(new BABYLON.Vector3(0, 2, 0));
-})
+    camera.target = player.position;
+});
 
 // Main loop
 engine.runRenderLoop(() => {
