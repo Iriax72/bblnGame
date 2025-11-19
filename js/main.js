@@ -14,7 +14,7 @@ const engine = new BABYLON.Engine(canvas, true);
 const scene = new BABYLON.Scene(engine);
 
 // Ground
-createGround(scene);
+const ground = createGround(scene);
 
 // Player
 const player = new BABYLON.MeshBuilder.CreateBox("player", {size: 2}, scene);
@@ -35,26 +35,24 @@ camera.lowerBetaLimit = -Math.PI/6;
 camera.upperBetaLimit = Math.PI/2;
 
 // Player's movement
-if (isMobile) {
-    const inputs = new BABYLON.Vecteur2.Zero();
-} else {
-    const inputs = {};
+const keyboardInputs = {};
+if (!isMobile) {
     window.addEventListener("keydown", (event) => {
-        inputs[event.key] = true;
+        keyboardInputs[event.key] = true;
     });
     window.addEventListener("keyup", (event) => {
-        inputs[event.key] = false;
+        keyboardInputs[event.key] = false;
     });
 }
 
-function playerMovement(inputs) {
+function playerMovement(keyboardInputs) {
     if (isMobile) {
         
     } else {
-        if (inputs["w"] || inputs["ArrowUp"]) player.position.z += playerSpeed;
-        if (inputs["s"] || inputs["ArrowDown"]) player.position.z -= playerSpeed;
-        if (inputs["a"] || inputs["ArrowLeft"]) player.position.x -= playerSpeed;
-        if (inputs["d"] || inputs["ArrowRight"]) player.position.x -= playerSpeed;
+        if (keyboardInputs["w"] || keyboardInputs["ArrowUp"]) player.position.z += playerSpeed;
+        if (keyboardInputs["s"] || keyboardInputs["ArrowDown"]) player.position.z -= playerSpeed;
+        if (keyboardInputs["a"] || keyboardInputs["ArrowLeft"]) player.position.x -= playerSpeed;
+        if (keyboardInputs["d"] || keyboardInputs["ArrowRight"]) player.position.x += playerSpeed;
     }
 }
 
@@ -65,7 +63,7 @@ scene.registerBeforeRender(() => {
 
 // Main loop
 engine.runRenderLoop(() => {
-    playerMovement(inputs);
+    playerMovement(keyboardInputs);
     scene.render();
 });
 
