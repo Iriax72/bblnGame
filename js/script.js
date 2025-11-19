@@ -1,4 +1,6 @@
 const canvas = document.querySelector("#renderCanvas");
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
 const engine = new BABYLON.Engine(canvas, true);
 const scene = new BABYLON.Scene(engine);
 const player = new BABYLON.MeshBuilder.CreateBox("player", {size: 2}, scene);
@@ -26,4 +28,8 @@ scene.registerBeforeRender(() => {
 
 engine.runRenderLoop(gameLoop);
 
-window.addEventListener("resize", ()=>{engine.resize();})
+window.addEventListener("resize", ()=>{
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    engine.resize();
+})
