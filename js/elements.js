@@ -2,6 +2,11 @@ export function createGround(scene) {
     
 }
 
+export function createPlayer(scene) {
+    const player = new BABYLON.MeshBuilder.CreateBox("player", {size: 2}, scene);
+    return player;
+}
+
 export function createCamera(scene, player) {
     const camera = new BABYLON.ArcRoatateCamera(
         "camera",

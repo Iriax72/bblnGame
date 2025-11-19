@@ -1,4 +1,4 @@
-import {createGround, createCamera} from "./elements.js"
+import {createGround, createPlayer, createCamera} from "./elements.js"
 
 // const values
 const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
@@ -15,10 +15,8 @@ const scene = new BABYLON.Scene(engine);
 
 // Ground
 const ground = createGround(scene);
-
 // Player
-const player = new BABYLON.MeshBuilder.CreateBox("player", {size: 2}, scene);
-
+const player = createPlayer(scene);
 // Camera
 const camera = createCamera(scene, player);
 
