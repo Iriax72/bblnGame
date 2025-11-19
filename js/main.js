@@ -1,4 +1,4 @@
-import {createGround, createPlayer, createCamera} from "./elements.js"
+import {createLight, createGround, createPlayer, createCamera} from "./elements.js"
 
 // const values
 const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
@@ -13,6 +13,8 @@ canvas.height = window.innerHeight;
 const engine = new BABYLON.Engine(canvas, true);
 // Scene :
 const scene = new BABYLON.Scene(engine);
+// Light :
+const light = createLight(scene);
 // Ground :
 const ground = createGround(scene);
 // Player :
@@ -32,6 +34,7 @@ if (!isMobile) {
 }
 
 scene.registerBeforeRender(() => {
+    // player's movement
     if (keyboardInputs["w"] || keyboardInputs["ArrowUp"]) player.position.z += playerSpeed;
     if (keyboardInputs["s"] || keyboardInputs["ArrowDown"]) player.position.z -= playerSpeed;
     if (keyboardInputs["a"] || keyboardInputs["ArrowLeft"]) player.position.x -= playerSpeed;
