@@ -1,3 +1,5 @@
+import {createGround} from "./ground.js"
+
 // const values
 const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 const playerSpeed = 0.2;
@@ -10,6 +12,9 @@ canvas.height = window.innerHeight;
 // Engine & Scene
 const engine = new BABYLON.Engine(canvas, true);
 const scene = new BABYLON.Scene(engine);
+
+// Ground
+createGround();
 
 // Player
 const player = new BABYLON.MeshBuilder.CreateBox("player", {size: 2}, scene);
