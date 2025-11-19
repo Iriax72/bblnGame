@@ -45,7 +45,6 @@ scene.registerBeforeRender(() => {
 
 // Main loop
 engine.runRenderLoop(() => {
-    playerMovement(keyboardInputs);
     scene.render();
 });
 
