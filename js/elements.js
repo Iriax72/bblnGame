@@ -8,7 +8,7 @@ export function createPlayer(scene) {
 }
 
 export function createCamera(scene, player) {
-    const camera = new BABYLON.ArcRoatateCamera(
+    const camera = new BABYLON.ArcRotateCamera(
         "camera",
         Math.PI/2,
         Math.PI/4,
