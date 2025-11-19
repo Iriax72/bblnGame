@@ -10,8 +10,20 @@ export function createLight(scene) {
 }
 
 // Ground :
-export function createGround(scene) {
-    
+export function createGround(scene, subdivisions) {
+    const ground = BABYLON.MeshBuilder.CreateGroundFromHeightMap(
+        "ground",
+        "../assets/images/heightmap.png",
+        {
+            width: 100,
+            height: 100,
+            subdivisions: subdivisions,
+            minheight: 0,
+            maxheight: 10
+        },
+        scene
+    );
+    return ground;
 }
 
 // Player :
