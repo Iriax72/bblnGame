@@ -1,3 +1,3 @@
-export function createGround() {
+export function createGround(scene) {
     
 }
