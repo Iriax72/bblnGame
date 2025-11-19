@@ -13,7 +13,7 @@ const camera = new BABYLON.ArcRotateCamera(
 camera.attachControl();
 camera.lowerRadiusLimit = camera.upperRadiusLimit = camera.radius;
 camera.panningSensibility = 0;
-camera.lowerBetaLimit = Math.PI/6;
+camera.lowerBetaLimit = -Math.PI/6;
 camera.upperBetaLimit = Math.PI/2;
 
 function gameLoop() {
