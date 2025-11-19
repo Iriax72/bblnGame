@@ -14,7 +14,7 @@ const engine = new BABYLON.Engine(canvas, true);
 const scene = new BABYLON.Scene(engine);
 
 // Ground
-createGround();
+createGround(scene);
 
 // Player
 const player = new BABYLON.MeshBuilder.CreateBox("player", {size: 2}, scene);
@@ -35,7 +35,9 @@ camera.lowerBetaLimit = -Math.PI/6;
 camera.upperBetaLimit = Math.PI/2;
 
 // Player's movement
-if (!isMobile) {
+if (isMobile) {
+    const inputs = new BABYLON.Vecteur2.Zero();
+} else {
     const inputs = {};
     window.addEventListener("keydown", (event) => {
         inputs[event.key] = true;
