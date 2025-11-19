@@ -1,6 +1,6 @@
 // Light :
 export function createLight(scene) {
-    const light = new BABYLON.HemisphericalLight(
+    const light = new BABYLON.HemisphericLight(
         "light",
         new BABYLON.Vector3(0, 1, 0),
         scene
