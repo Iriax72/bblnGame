@@ -23,13 +23,13 @@ export function createGround(scene, subdivisions) {
         },
         scene
     );
-    ground.onReadyObservable.add(() => {
-        const texture = new BABYLON.StandardMaterial("groundTexture", scene);
-        texture.diffuseTexture = new BABYLON.Texture("/assets/images/groundtexture.png", scene)
-        ground.material = texture;
+    const texture = new BABYLON.StandardMaterial("groundTexture", scene);
+    texture.diffuseTexture = new BABYLON.Texture("/assets/images/groundtexture.png", scene);
 
-        resolve(ground);
+    ground.onReadyObservable.add(() => {
+        ground.material = texture;
     });
+    return ground;
 }
 
 // Player :
