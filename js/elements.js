@@ -23,6 +23,9 @@ export function createGround(scene, subdivisions) {
         },
         scene
     );
+    const texture = new BABYLON.StandardMaterial("groundTexture", scene);
+    texture.diffuseTexture = new BABYLON.Texture("../assets/images/groundtexture.png", scene)
+    ground.material = texture;
     return ground;
 }
 
