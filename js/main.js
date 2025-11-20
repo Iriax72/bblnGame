@@ -41,7 +41,7 @@ scene.registerBeforeRender(() => {
     if (keyboardInputs["a"] || keyboardInputs["ArrowLeft"]) player.position.x -= playerSpeed;
     if (keyboardInputs["d"] || keyboardInputs["ArrowRight"]) player.position.x += playerSpeed;
     // Camera's movement
-    camera.target = player.position;
+    camera.target = player.position.add(new BABYLON.Vector3(0, 1, 0));
 });
 
 // Main loop

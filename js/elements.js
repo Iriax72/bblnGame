@@ -42,7 +42,7 @@ export function createCamera(scene, player) {
         Math.PI/2,
         Math.PI/4,
         10,
-        player.position,
+        player.position.add(new BABYLON.Vector3(0, 1, 0)),
         scene
     );
     camera.attachControl();
