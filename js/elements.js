@@ -18,8 +18,8 @@ export function createGround(scene, subdivisions) {
             width: 100,
             height: 100,
             subdivisions: subdivisions,
-            minheight: 0,
-            maxheight: 10
+            minHeight: 0,
+            maxHeight: 10
         },
         scene
     );
@@ -32,7 +32,6 @@ export function createGround(scene, subdivisions) {
 // Player :
 export function createPlayer(scene) {
     const player = new BABYLON.MeshBuilder.CreateBox("player", {size: 2}, scene);
-    player.position.y = 1;
     return player;
 }
 
@@ -43,7 +42,7 @@ export function createCamera(scene, player) {
         Math.PI/2,
         Math.PI/4,
         10,
-        player.position.add(new BABYLON.Vector3(0, 1, 0)),
+        player.position,
         scene
     );
     camera.attachControl();
