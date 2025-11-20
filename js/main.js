@@ -14,37 +14,35 @@ const engine = new BABYLON.Engine(canvas, true);
 // Scene :
 const scene = new BABYLON.Scene(engine);
 
-(async () => {
-    // Light :
-    const light = createLight(scene);
-    // Ground :
-    const ground = await createGround(scene, isMobile ? 50 : 150);
-    ground.showBoundingBox = true;
-    // Player :
-    const player = createPlayer(scene);
-    // Camera :
-    const camera = createCamera(scene, player);
+// Light :
+const light = createLight(scene);
+// Ground :
+const ground = createGround(scene, isMobile ? 50 : 150);
+ground.showBoundingBox = true;
+// Player :
+const player = createPlayer(scene);
+// Camera :
+const camera = createCamera(scene, player);
       
-    // keyboard's inputs
-    const keyboardInputs = {};
-    if (!isMobile) {
-        window.addEventListener("keydown", (event) => {
-            keyboardInputs[event.key] = true;
-        });
-        window.addEventListener("keyup", (event) => {
-            keyboardInputs[event.key] = false;
-        });
-    }
-
-    scene.registerBeforeRender(() => {
-        // player's movement
-        if (keyboardInputs["w"] || keyboardInputs["ArrowUp"]) player.position.z += playerSpeed;
-        if (keyboardInputs["s"] || keyboardInputs["ArrowDown"]) player.position.z -= playerSpeed;
-        if (keyboardInputs["a"] || keyboardInputs["ArrowLeft"]) player.position.x -= playerSpeed;
-        if (keyboardInputs["d"] || keyboardInputs["ArrowRight"]) player.position.x += playerSpeed;
-        // Camera's movement
-        camera.target = player.position.add(new BABYLON.Vector3(0, 1, 0));
+// keyboard's inputs
+const keyboardInputs = {};
+if (!isMobile) {
+    window.addEventListener("keydown", (event) => {
+        keyboardInputs[event.key] = true;
     });
+    window.addEventListener("keyup", (event) => {
+        keyboardInputs[event.key] = false;
+    });
+}
+
+scene.registerBeforeRender(() => {
+    // player's movement
+    if (keyboardInputs["w"] || keyboardInputs["ArrowUp"]) player.position.z += playerSpeed;
+    if (keyboardInputs["s"] || keyboardInputs["ArrowDown"]) player.position.z -= playerSpeed;
+    if (keyboardInputs["a"] || keyboardInputs["ArrowLeft"]) player.position.x -= playerSpeed;
+    if (keyboardInputs["d"] || keyboardInputs["ArrowRight"]) player.position.x += playerSpeed;
+    // Camera's movement
+    camera.target = player.position.add(new BABYLON.Vector3(0, 1, 0));
 });
 
 // Main loop
