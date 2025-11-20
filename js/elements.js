@@ -13,7 +13,7 @@ export function createLight(scene) {
 export function createGround(scene, subdivisions) {
     const ground = BABYLON.MeshBuilder.CreateGroundFromHeightMap(
         "ground",
-        "../assets/images/heightmap.png",
+        "/assets/images/heightmap.png",
         {
             width: 100,
             height: 100,
@@ -24,7 +24,7 @@ export function createGround(scene, subdivisions) {
         scene
     );
     const texture = new BABYLON.StandardMaterial("groundTexture", scene);
-    texture.diffuseTexture = new BABYLON.Texture("../assets/images/groundtexture.png", scene)
+    texture.diffuseTexture = new BABYLON.Texture("/assets/images/groundtexture.png", scene)
     ground.material = texture;
     return ground;
 }
