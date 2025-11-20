@@ -16,7 +16,7 @@ const scene = new BABYLON.Scene(engine);
 // Light :
 const light = createLight(scene);
 // Ground :
-const ground = await createGround(scene, isMobile ? 50 : 150);
+const ground = createGround(scene, isMobile ? 50 : 150);
 ground.showBoundingBox = true;
 // Player :
 const player = createPlayer(scene);
