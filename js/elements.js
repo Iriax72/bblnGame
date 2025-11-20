@@ -11,6 +11,7 @@ export function createLight(scene) {
 
 // Ground :
 export function createGround(scene, subdivisions) {
+    alert("début de la fonction");
     return new Promise((resolve) => {
         const ground = BABYLON.MeshBuilder.CreateGroundFromHeightMap(
             "ground",
@@ -26,11 +27,11 @@ export function createGround(scene, subdivisions) {
         );
         const texture = new BABYLON.StandardMaterial("groundTexture", scene);
         texture.diffuseTexture = new BABYLON.Texture("/assets/images/groundtexture.png", scene);
-        
         ground.onReadyObservable.add(() => {
             ground.material = texture;
+            alert("resolve(ground)");
             resolve(ground);
-        });
+        })
     });
 };
 
