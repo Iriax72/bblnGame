@@ -17,6 +17,7 @@ const scene = new BABYLON.Scene(engine);
 const light = createLight(scene);
 // Ground :
 const ground = createGround(scene, isMobile ? 50 : 150);
+ground.showBoundingBox = true;
 // Player :
 const player = createPlayer(scene);
 // Camera :
@@ -54,3 +55,6 @@ window.addEventListener("resize", ()=>{
     canvas.height = window.innerHeight;
     engine.resize();
 })
+
+// debug:
+alert("ground's position : " + ground.position + "\nplayer's position : " + player.position);
