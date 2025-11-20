@@ -41,7 +41,7 @@ scene.registerBeforeRender(() => {
     if (keyboardInputs["a"] || keyboardInputs["ArrowLeft"]) player.position.x -= playerSpeed;
     if (keyboardInputs["d"] || keyboardInputs["ArrowRight"]) player.position.x += playerSpeed;
     // Camera's movement
-    camera.target = player.position;
+    camera.target = player.position.add(new BABYLON.Vector3(0, 1, 0));
 });
 
 // Main loop
@@ -55,6 +55,3 @@ window.addEventListener("resize", ()=>{
     canvas.height = window.innerHeight;
     engine.resize();
 })
-
-// debug:
-alert("ground's position : " + ground.position + "\nplayer's position : " + player.position);
