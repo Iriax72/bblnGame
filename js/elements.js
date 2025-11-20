@@ -36,6 +36,7 @@ export function createGround(scene, subdivisions) {
                 resolve(ground);
             })
         }
+        heightMap.onerror = () => {alert("Impossible de charger l'image.")};
     });
 };
 
