@@ -22,14 +22,15 @@ export function createGround(scene, subdivisions) {
                 minHeight: 0,
                 maxHeight: 10
             },
-            scene,
-            (groundMesh) => {
-                const texture = new BABYLON.StandardMaterial("groundTexture", scene);
-                texture.diffuseTexture = new BABYLON.Texture("/assets/images/groundtexture.png", scene);
-                groundMesh.material = texture;
-                resolve(groundMesh)
-            }
+            scene
         );
+        const texture = new BABYLON.StandardMaterial("groundTexture", scene);
+        texture.diffuseTexture = new BABYLON.Texture("/assets/images/groundtexture.png", scene);
+        
+        ground.onReadyObservable.add(() => {
+            ground.material = texture;
+            resolve(ground);
+        });
     });
 };
 
