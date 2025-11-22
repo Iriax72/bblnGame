@@ -1,2 +1,2 @@
 # bblnGame
-Je crée un jeu en ts avec babylon
+Je crée un jeu en js avec babylon
