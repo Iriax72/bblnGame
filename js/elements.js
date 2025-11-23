@@ -14,7 +14,7 @@ export function createGround(scene, subdivisions) {
     alert("début de la fonction ground")
     return new Promise((resolve) => {
         alert("Prochaine ligne: création du ground")
-        const ground = BABYLON.MeshBuilder.CreateGroundFromHeightMap(
+        const ground = BABYLON.Mesh.CreateGroundFromHeightMap(
             "ground",
             "assets/images/heightmap.png",
             {
