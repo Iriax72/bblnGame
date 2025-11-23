@@ -30,8 +30,8 @@ export function createGround(scene, subdivisions) {
                 const material = new BABYLON.StandardMaterial("groundTexture", scene);
                 material.diffuseTexture = new BABYLON.Texture("assets/images/groundtexture.png", scene);
                 alert("texture crée");
-                ground.material = material;
-                resolve(ground);
+                mesh.material = material;
+                resolve(mesh);
             },
         );
     });
