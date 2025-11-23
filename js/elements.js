@@ -14,37 +14,35 @@ export function createGround(scene, subdivisions) {
     alert("début de la fonction ground")
     return new Promise((resolve) => {
         alert("premier alert")
-        const heightMap = new Image();
-        alert("2")
-        heightMap.onload = () => {
-            alert("image chargée !!")
-            const ground = BABYLON.MeshBuilder.CreateGroundFromHeightMap(
-                "ground",
-                heightMap.src,
-                {
-                    width: 100,
-                    height: 100,
-                    subdivisions: subdivisions,
-                    minHeight: 0,
-                    maxHeight: 10
-                },
-                scene
-            );
-            alert("ground créé!!")
-            const texture = new BABYLON.StandardMaterial("groundTexture", scene);
-            texture.diffuseTexture = new BABYLON.Texture("/assets/images/groundtexture.png", scene);
-            alert("texture created");
-            ground.onReadyObservable.add(() => {
-                ground.material = texture;
-                alert("resolve(ground)");
-                resolve(ground);
-            })
-        }
-        heightMap.onerror = (e) => {alert("Impossible de charger l'image." + e);};
-        heightMap.src = "assets/images/heightmap.png";
-        alert("src donnee");
+        alert("image chargée !!")
+        const ground = BABYLON.MeshBuilder.CreateGroundFromHeightMap(
+            "ground",
+            "assets/images/heightmap.png",
+            {
+                width: 100,
+                height: 100,
+                subdivisions: subdivisions,
+                minHeight: 0,
+                maxHeight: 10
+            },
+            scene,
+            (mesh) => {
+                alert("ground créé!!")
+                const texture = new BABYLON.StandardMaterial("groundTexture", scene);
+                texture.diffuseTexture = new BABYLON.Texture("/assets/images/groundtexture.png", scene);
+                alert("texture created");
+                ground.onReadyObservable.add(() => {
+                    ground.material = texture;
+                    alert("resolve(ground)");
+                    resolve(ground);
+                });
+            },
+            (message, exeption) => {
+                alert("error: de chargement" + message)
+            }
+        );
     });
-};
+}
 
 // Player :
 export function createPlayer(scene) {
