@@ -28,16 +28,15 @@ export function createGround(scene, subdivisions) {
             (mesh) => {
                 alert("ground créé!!")
                 const texture = new BABYLON.StandardMaterial("groundTexture", scene);
-                texture.diffuseTexture = new BABYLON.Texture("/assets/images/groundtexture.png", scene);
+                texture.diffuseTexture = new BABYLON.Texture("assets/images/groundtexture.png", scene);
                 alert("texture crée");
                 ground.onReadyObservable.add(() => {
                     ground.material = texture;
-                    alert("resolve(ground)");
                     resolve(ground);
                 });
             },
             (message, exeption) => {
-                alert("error: de chargement" + message)
+                alert("erreur de chargement: " + message)
             }
         );
     });

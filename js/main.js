@@ -18,7 +18,6 @@ const scene = new BABYLON.Scene(engine);
 const light = createLight(scene);
 // Ground :
 const groundPromise = createGround(scene, isMobile ? 50 : 150);
-alert("promize created !")
 // Player :
 const player = createPlayer(scene);
 // Camera :
