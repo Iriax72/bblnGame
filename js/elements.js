@@ -16,8 +16,6 @@ export function createGround(scene, subdivisions) {
         alert("premier alert")
         const heightMap = new Image();
         alert("2")
-        heightMap.scr = "/assets/images/heightmap.png";
-        alert("3")
         heightMap.onload = () => {
             const ground = BABYLON.MeshBuilder.CreateGroundFromHeightMap(
                 "ground",
@@ -42,6 +40,8 @@ export function createGround(scene, subdivisions) {
             })
         }
         heightMap.onerror = () => {alert("Impossible de charger l'image.")};
+        heightMap.src = "/assets/images/heightmap.png";
+        alert("src donnee");
     });
 };
 
