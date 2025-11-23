@@ -40,7 +40,7 @@ export function createGround(scene, subdivisions) {
             })
         }
         heightMap.onerror = () => {alert("Impossible de charger l'image.")};
-        heightMap.src = "/assets/images/heightmap.png";
+        heightMap.src = "assets/images/heightmap.png";
         alert("src donnee");
     });
 };
