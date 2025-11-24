@@ -11,8 +11,6 @@ export function createLight(scene) {
 
 // Ground :
 export function createGround(scene, subdivisions) {
-    alert("début de la fonction ground")
-    alert("Prochaine ligne: création du ground")
     const ground = BABYLON.MeshBuilder.CreateGroundFromHeightMap(
         "ground",
         "assets/images/heightmap.png",
@@ -22,15 +20,9 @@ export function createGround(scene, subdivisions) {
             subdivisions: subdivisions,
             minHeight: 0,
             maxHeight: 10,
-            updatable: false,
-            onError: (message) => {
-                alert("erreur: " + message);
-            },    
+            updatable: false,  
             onReady: (mesh) => {
-                alert("callback execute!!")
-                const material = new BABYLON.StandardMaterial("groundTexture", scene);
-                material.diffuseTexture = new BABYLON.Texture("assets/images/groundtexture.png", scene);
-                ground.material = material;
+                applyTexture(mesh, "assets/images/groundtexture.png", scene);
             }
         },
         scene
@@ -62,4 +54,15 @@ export function createCamera(scene, player) {
     camera.lowerBetaLimit = -Math.PI/6;
     camera.upperBetaLimit = Math.PI/2;
     return camera;
+}
+
+function applyTexture(mesh, url, scene) {
+    const texture = new BABYLON.Texture(url, scene);
+    texture.wrapU = new BABYLON.Texture.MIRROR_ADRESSMODE;
+    texture.wrapV = new BABYLON.Texture.MIRROR_ADRESSMODE;
+    texture.uScale = 40;
+    texture.vScale = 40;
+    const material = new BABYLON.StandardMaterial(mesh.name + "Material", scene);
+    material.diffuseTexture = texture;
+    mesh.material = material;
 }
