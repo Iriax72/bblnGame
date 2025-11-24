@@ -15,8 +15,8 @@ export function createGround(scene, subdivisions) {
         "ground",
         "assets/images/heightmap.png",
         {
-            width: 100,
-            height: 100,
+            width: 200,
+            height: 200,
             subdivisions: subdivisions,
             minHeight: 0,
             maxHeight: 10,
