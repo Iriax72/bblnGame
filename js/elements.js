@@ -18,7 +18,7 @@ export function createGround(scene, subdivisions) {
             width: 200,
             height: 200,
             subdivisions: subdivisions,
-            minHeight: -3,
+            minHeight: -4,
             maxHeight: 10,
             updatable: false,  
             onReady: (mesh) => {
