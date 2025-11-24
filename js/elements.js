@@ -18,7 +18,7 @@ export function createGround(scene, subdivisions) {
             width: 200,
             height: 200,
             subdivisions: subdivisions,
-            minHeight: 0,
+            minHeight: -10,
             maxHeight: 10,
             updatable: false,  
             onReady: (mesh) => {
@@ -33,9 +33,6 @@ export function createGround(scene, subdivisions) {
 // Player :
 export function createPlayer(scene) {
     const player = new BABYLON.MeshBuilder.CreateBox("player", {size: 2}, scene);
-    player.position.x = 0;
-    player.position.y = 1;
-    player.position.z = 6;
     return player;
 }
 
