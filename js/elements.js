@@ -21,20 +21,20 @@ export function createGround(scene, subdivisions) {
             height: 100,
             subdivisions: subdivisions,
             minHeight: 0,
-            maxHeight: 10
+            maxHeight: 10,
+            updatable: false,
+            onError: (message) => {
+                alert("erreur: " + message);
+            },    
+            onReady: (mesh) => {
+                alert("callback execute!!")
+                const material = new BABYLON.StandardMaterial("groundTexture", scene);
+                material.diffuseTexture = new BABYLON.Texture("assets/images/groundtexture.png", scene);
+                ground.material = material;
+            }
         },
-        scene,
+        scene
     );
-    ground.onCreatedObservable.add(() => {
-        alert("groundcreated")
-    });
-    ground.onReadyObservable.add((mesh) => {
-        alert("callback execute!!")
-        const material = new BABYLON.StandardMaterial("groundTexture", scene);
-        material.diffuseTexture = new BABYLON.Texture("assets/images/groundtexture.png", scene);
-        alert("texture crée");
-        ground.material = material;
-    });
     return ground;
 }
 

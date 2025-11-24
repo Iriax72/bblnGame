@@ -17,7 +17,7 @@ const scene = new BABYLON.Scene(engine);
 // Light :
 const light = createLight(scene);
 // Ground :
-const groundPromise = createGround(scene, isMobile ? 50 : 150);
+const ground = createGround(scene, isMobile ? 70 : 150);
 // Player :
 const player = createPlayer(scene);
 // Camera :
@@ -32,12 +32,7 @@ if (!isMobile) {
     window.addEventListener("keyup", (event) => {
         keyboardInputs[event.key] = false;
     });
-}
-
-groundPromise.then((ground) => {
-    alert("promise resolved !")
-    ground.showBoundingBox = true;
-});
+} 
 
 scene.registerBeforeRender(() => {
     // player's movement
