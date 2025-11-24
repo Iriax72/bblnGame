@@ -58,8 +58,8 @@ export function createCamera(scene, player) {
 
 function applyTexture(mesh, url, scene) {
     const texture = new BABYLON.Texture(url, scene);
-    texture.wrapU = new BABYLON.Texture.MIRRORED_REPEAT;
-    texture.wrapV = new BABYLON.Texture.MIRRORED_REPEAT;
+    texture.wrapU = MIRRORED_REPEAT;
+    texture.wrapV = MIRRORED_REPEAT;
     texture.uScale = 40;
     texture.vScale = 40;
     const material = new BABYLON.StandardMaterial(mesh.name + "Material", scene);
