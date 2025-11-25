@@ -85,6 +85,13 @@ function applyTexture(mesh, url, scene) {
         samplers: ["rockTexture", "grassTexture", "snowTexture"]
     });
 
+    // Attraper les erreurs (temporaire):
+    material.onError = function(effect, errors) {
+        console.error("ShaderMaterial error:", errors);
+        alert("Erreur dans le ShaderMaterial:\n\n" + errors);
+    };
+
+
     material.setTexture("rockTexture", new BABYLON.Texture(url[0], scene));
     material.setTexture("grassTexture", new BABYLON.Texture(url[1], scene));
     material.setTexture("snowTexture", new BABYLON.Texture(url[2], scene));

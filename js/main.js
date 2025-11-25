@@ -11,8 +11,17 @@ canvas.height = window.innerHeight;
 
 // Engine :
 const engine = new BABYLON.Engine(canvas, true);
-// Scene :
+// Scene:
 const scene = new BABYLON.Scene(engine);
+
+// Attraper les erreurs (temporaire):
+engine.onShaderError = function(error, shaderType) {
+    console.error("Erreur shader :", error, shaderType);
+    alert("Erreur shader (" + shaderType + "):\n\n" + error);
+};
+BABYLON.Engine.ShadersRepository = "";
+engine.enableOfflineSupport = false;
+scene.getEngine().validateShaderPrograms = true;
 
 // Light :
 const light = createLight(scene);
