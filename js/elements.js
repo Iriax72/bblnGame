@@ -22,7 +22,16 @@ export function createGround(scene, subdivisions) {
             maxHeight: 10,
             updatable: false,  
             onReady: (mesh) => {
-                applyTexture(mesh, "assets/images/groundtexture.png", scene);
+                await loadGroundShaders();
+                applyTexture(
+                    mesh, 
+                    [
+                        "assets/images/rocktexture.png",
+                        "assets/images/grasstexture.png",
+                        "assets/images/snowtexture.png"
+                    ],
+                    scene
+                );
             }
         },
         scene
@@ -56,12 +65,37 @@ export function createCamera(scene, player) {
 }
 
 function applyTexture(mesh, url, scene) {
-    const texture = new BABYLON.Texture(url, scene);
+    const material = new BABYLON.ShaderMaterial(mesh.name + "Material", scene, {
+        vertex: "terrain",
+        fragment: "terrain"
+    }, 
+    {
+        attributs: ["position", "uv"],
+        uniforms: ["world", "worldViewProjection", "grassStart", "snowStart"],
+        samplers: ["rockTexture", "grassTexture", "snowTexture"]
+    });
+
+    material.setTexture("rockTexture", new BABYLON.Texture(url[0], scene));
+    material.setTexture("grassTexture", new BABYLON.Texture(url[1], scene));
+    material.setTexture("snowTexture", new BABYLON.Texture(url[2], scene));
+
+    material.setFloat("grassStart", 0.0);
+    material.setFloat("snowStart", 6.0);
+    /*const texture = new BABYLON.Texture(url, scene);
     texture.wrapU = BABYLON.Texture.MIRROR_ADRESSMODE;
     texture.wrapV = BABYLON.Texture.MIRROR_ADRESSMODE;
     texture.uScale = 40;
     texture.vScale = 40;
     const material = new BABYLON.StandardMaterial(mesh.name + "Material", scene);
     material.diffuseTexture = texture;
+    */
     mesh.material = material;
+}
+
+async function loadGroundShaders(){
+    const vertexShader = await fetch("shaders/ground.vertex.glsl").then(r => r.text());
+    const fragmentShader = await fetch("shaders/ground.fragment.glsl").then(r => r.text());
+
+    BABYLON.Effect.shaderStore["terrainVertexShader"] = vertexShader;
+    BABYLON.Effect.shaderStore["terrainFragmentShader"] = fragmentShader;
 }
