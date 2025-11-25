@@ -1,3 +1,12 @@
+// Functions:
+async function loadGroundShaders() {
+    const vertexShader = await fetch("shader/ground.vertex.glsl").then(r => r.text());
+    const fragmentShader = await fetch("shader/ground.fragment.glsl").then(r => r.text());
+
+    BABYLON.Effect.shaderStore["terrainVertexShader"] = vertexShader;
+    BABYLON.Effect.shaderStore["terrainFragmentShader"] = fragmentShader;
+}
+
 // Light :
 export function createLight(scene) {
     const light = new BABYLON.HemisphericLight(
@@ -64,6 +73,7 @@ export function createCamera(scene, player) {
     return camera;
 }
 
+// Fonctions: 
 function applyTexture(mesh, url, scene) {
     const material = new BABYLON.ShaderMaterial(mesh.name + "Material", scene, {
         vertex: "terrain",
@@ -90,12 +100,4 @@ function applyTexture(mesh, url, scene) {
     material.diffuseTexture = texture;
     */
     mesh.material = material;
-}
-
-async function loadGroundShaders(){
-    const vertexShader = await fetch("shaders/ground.vertex.glsl").then(r => r.text());
-    const fragmentShader = await fetch("shaders/ground.fragment.glsl").then(r => r.text());
-
-    BABYLON.Effect.shaderStore["terrainVertexShader"] = vertexShader;
-    BABYLON.Effect.shaderStore["terrainFragmentShader"] = fragmentShader;
 }
