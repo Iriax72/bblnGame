@@ -5,6 +5,11 @@ async function loadGroundShaders() {
 
     BABYLON.Effect.shaderStore["terrainVertexShader"] = vertexShader;
     BABYLON.Effect.shaderStore["terrainFragmentShader"] = fragmentShader;
+
+    return {
+        'vertex': vertexShader,
+        'fragment': fragmentShader
+    };
 }
 
 // Light :
@@ -31,16 +36,18 @@ export function createGround(scene, subdivisions) {
             maxHeight: 10,
             updatable: false,  
             onReady: async (mesh) => {
-                await loadGroundShaders();
-                applyTexture(
-                    mesh, 
-                    [
-                        "assets/images/rocktexture.png",
-                        "assets/images/grasstexture.png",
-                        "assets/images/snowtexture.png"
-                    ],
-                    scene
-                );
+                loadGroundShaders().then((shaders) => {
+                    applyTexture(
+                        mesh, 
+                        [
+                            "assets/images/rocktexture.png",
+                            "assets/images/grasstexture.png",
+                            "assets/images/snowtexture.png"
+                        ],
+                        shaders,
+                        scene
+                    )
+                });
             }
         },
         scene
@@ -74,10 +81,10 @@ export function createCamera(scene, player) {
 }
 
 // Fonctions: 
-function applyTexture(mesh, url, scene) {
+function applyTexture(mesh, url, shaderCode, scene) {
     const material = new BABYLON.ShaderMaterial(mesh.name + "Material", scene, {
-        vertex: "terrain",
-        fragment: "terrain"
+        vertexSource: shaderCode['vertex'],
+        fragmentSource: shaderCode['fragment']
     }, 
     {
         attributs: ["position", "uv"],
