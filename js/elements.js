@@ -30,7 +30,7 @@ export function createGround(scene, subdivisions) {
             minHeight: -4,
             maxHeight: 10,
             updatable: false,  
-            onReady: (mesh) => {
+            onReady: async (mesh) => {
                 await loadGroundShaders();
                 applyTexture(
                     mesh, 
