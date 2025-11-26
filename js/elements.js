@@ -81,10 +81,10 @@ export function createCamera(scene, player) {
 }
 
 // Fonctions: 
-function applyTexture(mesh, url, shaderCode, scene) {
+function applyTexture(mesh, url, shaders, scene) {
     const material = new BABYLON.ShaderMaterial(mesh.name + "Material", scene, {
-        vertexSource: shaderCode['vertex'],
-        fragmentSource: shaderCode['fragment']
+        vertexSource: shaders.vertex,
+        fragmentSource: shaders.fragment
     }, 
     {
         attributs: ["position", "uv"],
