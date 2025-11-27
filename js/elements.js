@@ -1,10 +1,12 @@
+import { Effect, ShaderStore } from "@babylonjs/core/Materials/effects";
+
 // Functions:
 async function loadGroundShaders() {
     const vertexShader = await fetch("shaders/ground.vs.glsl").then(r => r.text());
     const fragmentShader = await fetch("shaders/ground.fs.glsl").then(r => r.text());
 
-    BABYLON.Effect.ShaderStore["terrainVertexShader"] = vertexShader;
-    BABYLON.Effect.ShaderStore["terrainFragmentShader"] = fragmentShader;
+    ShaderStore["terrainVertexShader"] = vertexShader;
+    ShaderStore["terrainFragmentShader"] = fragmentShader;
 
     return {
         vertex: "terrain",
