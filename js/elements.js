@@ -7,8 +7,8 @@ async function loadGroundShaders() {
     BABYLON.Effect.ShaderStore["terrainFragmentShader"] = fragmentShader;
 
     return {
-        'vertex': "terrain",
-        'fragment': "terrain"
+        vertex: "terrain",
+        fragment: "terrain"
     };
 }
 
