@@ -12,6 +12,43 @@ async function loadGroundShaders() {
     };
 }
 
+function applyTexture(mesh, url, shaders, scene) {
+    const material = new BABYLON.ShaderMaterial(mesh.name + "Material", scene, {
+        vertex: shaders.vertex,
+        fragment: shaders.fragment
+    }, 
+    {
+        attributs: ["position", "uv"],
+        uniforms: ["world", "worldViewProjection", "grassStart", "snowStart"],
+        samplers: ["rockTexture", "grassTexture", "snowTexture"]
+    });
+
+    // Attraper les erreurs (temporaire):
+    material.onError = function(effect, errors) {
+        console.error("ShaderMaterial error:", errors);
+        alert("Erreur dans le ShaderMaterial:\n\n" + errors);
+    };
+
+
+    material.setTexture("rockTexture", new BABYLON.Texture(url[0], scene));
+    material.setTexture("grassTexture", new BABYLON.Texture(url[1], scene));
+    material.setTexture("snowTexture", new BABYLON.Texture(url[2], scene));
+
+    material.setFloat("grassStart", 0.0);
+    material.setFloat("snowStart", 6.0);
+    mesh.material = material;
+    /*const texture = new BABYLON.Texture(url, scene);
+    texture.wrapU = BABYLON.Texture.MIRROR_ADRESSMODE;
+    texture.wrapV = BABYLON.Texture.MIRROR_ADRESSMODE;
+    texture.uScale = 40;
+    texture.vScale = 40;
+    const material = new BABYLON.StandardMaterial(mesh.name + "Material", scene);
+    material.diffuseTexture = texture;
+    mesh.material = material;
+    */
+    
+}
+
 // Light :
 export function createLight(scene) {
     const light = new BABYLON.HemisphericLight(
@@ -78,40 +115,4 @@ export function createCamera(scene, player) {
     camera.lowerBetaLimit = -Math.PI/6;
     camera.upperBetaLimit = Math.PI/2;
     return camera;
-}
-
-// Fonctions: 
-function applyTexture(mesh, url, shaders, scene) {
-    const material = new BABYLON.ShaderMaterial(mesh.name + "Material", scene, {
-        vertex: shaders.vertex,
-        fragment: shaders.fragment
-    }, 
-    {
-        attributs: ["position", "uv"],
-        uniforms: ["world", "worldViewProjection", "grassStart", "snowStart"],
-        samplers: ["rockTexture", "grassTexture", "snowTexture"]
-    });
-
-    // Attraper les erreurs (temporaire):
-    material.onError = function(effect, errors) {
-        console.error("ShaderMaterial error:", errors);
-        alert("Erreur dans le ShaderMaterial:\n\n" + errors);
-    };
-
-
-    material.setTexture("rockTexture", new BABYLON.Texture(url[0], scene));
-    material.setTexture("grassTexture", new BABYLON.Texture(url[1], scene));
-    material.setTexture("snowTexture", new BABYLON.Texture(url[2], scene));
-
-    material.setFloat("grassStart", 0.0);
-    material.setFloat("snowStart", 6.0);
-    /*const texture = new BABYLON.Texture(url, scene);
-    texture.wrapU = BABYLON.Texture.MIRROR_ADRESSMODE;
-    texture.wrapV = BABYLON.Texture.MIRROR_ADRESSMODE;
-    texture.uScale = 40;
-    texture.vScale = 40;
-    const material = new BABYLON.StandardMaterial(mesh.name + "Material", scene);
-    material.diffuseTexture = texture;
-    */
-    mesh.material = material;
 }
