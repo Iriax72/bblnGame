@@ -1,7 +1,7 @@
 // Functions:
 async function loadGroundShaders() {
-    const vertexShader = await fetch("shader/ground.vs.glsl").then(r => r.text());
-    const fragmentShader = await fetch("shader/ground.fs.glsl").then(r => r.text());
+    const vertexShader = await fetch("shaders/ground.vs.glsl").then(r => r.text());
+    const fragmentShader = await fetch("shaders/ground.fs.glsl").then(r => r.text());
 
     BABYLON.Effect.ShaderStore["terrainVertexShader"] = vertexShader;
     BABYLON.Effect.ShaderStore["terrainFragmentShader"] = fragmentShader;
