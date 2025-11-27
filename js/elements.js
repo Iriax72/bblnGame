@@ -29,6 +29,7 @@ function applyTexture(mesh, url, shaders, scene) {
         alert("Erreur dans le ShaderMaterial:\n\n" + errors);
     };
 
+    material.setMatrix("worldViewProjection", scene.getTransformMatrix());
 
     material.setTexture("rockTexture", new BABYLON.Texture(url[0], scene));
     material.setTexture("grassTexture", new BABYLON.Texture(url[1], scene));
@@ -36,9 +37,8 @@ function applyTexture(mesh, url, shaders, scene) {
 
     material.setFloat("grassStart", 0.0);
     material.setFloat("snowStart", 6.0);
-    alert("mesh.material = material; maintenant:")
+
     mesh.material = material;
-    alert("fin deapplytexture avec succes !")
     /*const texture = new BABYLON.Texture(url, scene);
     texture.wrapU = BABYLON.Texture.MIRROR_ADRESSMODE;
     texture.wrapV = BABYLON.Texture.MIRROR_ADRESSMODE;

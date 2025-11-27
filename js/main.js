@@ -27,7 +27,6 @@ scene.getEngine().validateShaderPrograms = true;
 const light = createLight(scene);
 // Ground :
 const ground = createGround(scene, isMobile ? 70 : 150);
-alert(scene.getMeshByName("ground").material)
 // Player :
 const player = createPlayer(scene);
 // Camera :
