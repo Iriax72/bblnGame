@@ -1,18 +1,21 @@
 // Functions:
 async function loadGroundShaders() {
+    alert("debut de loadGroundShader, il a été appelé")
     const vertexShader = await fetch("shaders/ground.vs.glsl").then(r => r.text());
     const fragmentShader = await fetch("shaders/ground.fs.glsl").then(r => r.text());
 
     BABYLON.ShaderStore["terrainVertexShader"] = vertexShader;
     BABYLON.ShaderStore["terrainFragmentShader"] = fragmentShader;
-
+    alert("fin de loadGShaders, return maintenant:")
     return {
         vertex: "terrain",
         fragment: "terrain"
     };
+''
 }
 
 function applyTexture(mesh, url, shaders, scene) {
+    alert("apply texture appele:")
     const material = new BABYLON.ShaderMaterial(mesh.name + "Material", scene, {
         vertex: shaders.vertex,
         fragment: shaders.fragment
@@ -36,7 +39,9 @@ function applyTexture(mesh, url, shaders, scene) {
 
     material.setFloat("grassStart", 0.0);
     material.setFloat("snowStart", 6.0);
+    alert("mesh.material = material; maintenant:")
     mesh.material = material;
+    alert("fin deapplytexture avec succes !")
     /*const texture = new BABYLON.Texture(url, scene);
     texture.wrapU = BABYLON.Texture.MIRROR_ADRESSMODE;
     texture.wrapV = BABYLON.Texture.MIRROR_ADRESSMODE;
@@ -74,6 +79,7 @@ export function createGround(scene, subdivisions) {
             updatable: false,  
             onReady: async (mesh) => {
                 loadGroundShaders().then((shaders) => {
+                    alert("callback appelé, la fonction apply texture va s'executer:")
                     applyTexture(
                         mesh, 
                         [
